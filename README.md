@@ -31,14 +31,17 @@ http://www.akadia.com/services/ssh_test_certificate.html
    # openssl pkcs12 -export -in server.crt -inkey server.key -out server.p12 -name server
 </pre>
 
-Import using Portecle*
+Import using Portecle [1]
+
+![Portecle](/images/Portecle1.7.jpg?raw=true "Portecle 1.7")
 
 In the following article, we are only left with a certificate request. An additional step is required to actually create a certificate. The openssl x509 tool will probably do the job -- I'll have to experiment later.
 
 https://blogs.oracle.com/blogbypuneeth/entry/steps_to_create_a_self1
 https://blogs.oracle.com/blogbypuneeth/entry/steps_to_create_a_self
 
-* Portecle 1.7 - See http://portecle.sourceforge.net/
+[1] Portecle 1.7 - See http://portecle.sourceforge.net/
+
 
 SSL Server
 

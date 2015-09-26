@@ -31,11 +31,12 @@ http://www.akadia.com/services/ssh_test_certificate.html
    # openssl pkcs12 -export -in server.crt -inkey server.key -out server.p12 -name server
 </pre>
 
-Import using Portecle
+Import using Portecle*
 
 https://blogs.oracle.com/blogbypuneeth/entry/steps_to_create_a_self1
 https://blogs.oracle.com/blogbypuneeth/entry/steps_to_create_a_self
 
+* Portecle 1.7 - See http://portecle.sourceforge.net/
 
 SSL Server
 

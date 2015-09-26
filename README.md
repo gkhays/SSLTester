@@ -43,4 +43,5 @@ SSL Server
    # openssl s_server -accept 4443 -www -cert server.crt -key server.key
 </pre>
 
-ww.openssl.org/docs/manmaster/apps/s_server.html
+https://www.openssl.org/docs/manmaster/apps/s_server.html
+

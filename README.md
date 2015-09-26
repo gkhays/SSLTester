@@ -33,6 +33,8 @@ http://www.akadia.com/services/ssh_test_certificate.html
 
 Import using Portecle*
 
+In the following article, we are only left with a certificate request. An additional step is required to actually create a certificate. The openssl x509 tool will probably do the job -- I'll have to experiment later.
+
 https://blogs.oracle.com/blogbypuneeth/entry/steps_to_create_a_self1
 https://blogs.oracle.com/blogbypuneeth/entry/steps_to_create_a_self
 

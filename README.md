@@ -1,6 +1,26 @@
 # SSLTester
 A set of SSL client and server testing tools
 
+# Debugging the SSL Connection
+
+Typically, you may use the ssl switch, e.g.
+
+<pre>
+  <code>
+  -Djavax.net.debug=ssl
+  </code>
+</pre>
+
+It is useful to watch the handshake, e.g.
+
+<pre>
+  <code>
+  -Djavax.net.debug.ssl:handshake
+  </code>
+</pre>
+
+Note: A value of "help" will show all options.
+
 ## Set up self-signed CA
 
 OpenSSL Self-Signed Certificate

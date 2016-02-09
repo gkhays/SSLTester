@@ -3,7 +3,7 @@ A set of SSL client and server testing tools
 
 # Debugging the SSL Connection
 
-Usually you will want to use the ssl switch in order to watch the handshake and other interactions, e.g.
+Usually you will want to use the ssl switch in order to watch the client and server interactions, e.g.
 
 <pre>
   <code>

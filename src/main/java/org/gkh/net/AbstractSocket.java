@@ -66,7 +66,8 @@ public class AbstractSocket {
 			// To just use the default Java keystore:
 			// ctx.init(null, null, null);
 			this.jks = KeyStore.getInstance("JKS");
-			InputStream in = new FileInputStream(path);
+//			InputStream in = new FileInputStream(path);
+			InputStream in = AbstractSocket.class.getResourceAsStream("/" + path);
 			jks.load(in, passphrase);
 		}
 
@@ -101,8 +102,8 @@ public class AbstractSocket {
 			System.out
 					.println("Creating secure socket to " + host + ":" + port);
 			this.socket = (SSLSocket) factory.createSocket(host, port);
-			// this.socket.setEnabledProtocols(new String[] {
-			// "TLSv1", "SSLv3", "SSLv2Hello" });
+//			this.socket.setEnabledProtocols(new String[] { "TLSv1", "SSLv3",
+//					"SSLv2Hello" });
 		}
 	}
     

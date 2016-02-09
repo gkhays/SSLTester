@@ -115,6 +115,9 @@ public class SSLClient extends AbstractSocket {
 					SSL_CONF, e.getMessage());
 			System.exit(1);
 		}
+
+		path = properties.getProperty("path");
+		secret = properties.getProperty("password");
 		String host = properties.getProperty("host");
 		String password = properties.getProperty("password");
 		int port = Integer.parseInt(properties.getProperty("port"));
@@ -129,17 +132,17 @@ public class SSLClient extends AbstractSocket {
 			}
 			SSLSocket socket = client.getSocket();
 
-			System.out.println("Supported Cipher Suites: ");
-			for (String s : socket.getSupportedCipherSuites()) {
-				System.out.println(s);
-			}
+//			System.out.println("Supported Cipher Suites: ");
+//			for (String s : socket.getSupportedCipherSuites()) {
+//				System.out.println(s);
+//			}
 
 			System.out.println("Registering a handshake listener...");
 			socket.addHandshakeCompletedListener(new MyHandshakeListener());
 
-			System.out.println("Supported protocols:");
-			for (String s : socket.getEnabledProtocols())
-				System.out.println(s);
+//			System.out.println("Supported protocols:");
+//			for (String s : socket.getEnabledProtocols())
+//				System.out.println(s);
 
 			System.out.println("Starting handshaking...");
 			socket.setUseClientMode(true);

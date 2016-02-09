@@ -3,7 +3,7 @@ A set of SSL client and server testing tools
 
 # Debugging the SSL Connection
 
-Typically, you may use the ssl switch, e.g.
+Usually you will want to use the ssl switch in order to watch the handshake and other interactions, e.g.
 
 <pre>
   <code>
@@ -20,6 +20,8 @@ It is useful to watch the handshake, e.g.
 </pre>
 
 Note: A value of "help" will show all options.
+
+![SSL Debug](images/SSL-Debug.png?raw=true "SSL Debug")
 
 ## Set up self-signed CA
 

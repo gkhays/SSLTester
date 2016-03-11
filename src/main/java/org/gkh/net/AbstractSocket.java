@@ -47,15 +47,6 @@ public class AbstractSocket {
 		this.host = host;
 		this.port = port;
 
-		// TODO - This is extra hacky, but I need to test with cacerts.
-		if (path.equals("cacerts")) {
-			ctx = SSLContext.getInstance("TLSv1.2");
-			ctx.init(null, null, null);
-			SSLSocketFactory factory = ctx.getSocketFactory();
-			this.socket = (SSLSocket) factory.createSocket(host, port);
-			return;
-		}
-		
 		KeyManagerFactory kmf = null;
 		TrustManagerFactory tmf = null;
 		kmf = KeyManagerFactory.getInstance("SunX509");
@@ -88,7 +79,7 @@ public class AbstractSocket {
 
 		// SSLContext Algorithms {SSL, SSLv2, SSLv3, TLS, TLSv1, TLSv1.1}
 		// http://download.oracle.com/javase/6/docs/technotes/guides//security/StandardNames.html#SSLContext
-		ctx = SSLContext.getInstance("TLSv1.2");
+		ctx = SSLContext.getInstance("TLSv1");
 		ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
 		System.out.println("Configured Protocol: " + ctx.getProtocol());

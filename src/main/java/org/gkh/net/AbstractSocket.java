@@ -88,7 +88,9 @@ public class AbstractSocket {
 
 		// SSLContext Algorithms {SSL, SSLv2, SSLv3, TLS, TLSv1, TLSv1.1}
 		// http://download.oracle.com/javase/6/docs/technotes/guides//security/StandardNames.html#SSLContext
-		ctx = SSLContext.getInstance("TLSv1");
+		// TODO - We should be able to toggle the protocol.
+		ctx = SSLContext.getInstance("TLSv1.2");
+		//ctx = SSLContext.getInstance("TLSv1");
 		ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
 		System.out.println("Configured Protocol: " + ctx.getProtocol());

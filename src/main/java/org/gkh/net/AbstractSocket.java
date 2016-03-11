@@ -47,6 +47,15 @@ public class AbstractSocket {
 		this.host = host;
 		this.port = port;
 
+		// TODO - This is extra hacky, but I need to test with cacerts.
+		if (path.equals("cacerts")) {
+			ctx = SSLContext.getInstance("TLSv1.2");
+			ctx.init(null, null, null);
+			SSLSocketFactory factory = ctx.getSocketFactory();
+			this.socket = (SSLSocket) factory.createSocket(host, port);
+			return;
+		}
+
 		KeyManagerFactory kmf = null;
 		TrustManagerFactory tmf = null;
 		kmf = KeyManagerFactory.getInstance("SunX509");

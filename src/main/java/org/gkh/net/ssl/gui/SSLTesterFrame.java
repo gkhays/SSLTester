@@ -4,10 +4,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.net.ssl.SSLSocket;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +25,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.gkh.net.ssl.App;
+import org.gkh.net.ssl.ClientThread;
+import org.gkh.net.ssl.SSLClient;
 
 public class SSLTesterFrame extends JFrame implements ActionListener {
 
@@ -35,9 +40,11 @@ public class SSLTesterFrame extends JFrame implements ActionListener {
 
 	private JButton _exit;
 	private JButton _connect;
+	private JCheckBox _useNss;
 	private JTextArea _textArea;
 	private JTextField _hostName;
 	private JTextField _portNumber;
+	private JTextField _keyStore;
 	private JPasswordField _password;
 	private JComboBox<String> _protocolList;
 
@@ -79,6 +86,13 @@ public class SSLTesterFrame extends JFrame implements ActionListener {
 		panel.add(portLabel);
 		panel.add(_portNumber);
 		
+		_keyStore = new JTextField(10);
+		_keyStore.setText("cacerts");
+		JLabel keyStoreLabel = new JLabel("Keystore:", JLabel.TRAILING);
+		keyStoreLabel.setLabelFor(_keyStore);
+		panel.add(keyStoreLabel);
+		panel.add(_keyStore);
+		
 		_password = new JPasswordField(10);
 		_password.setEchoChar('*');
 		JLabel passwordLabel = new JLabel("Password:", JLabel.TRAILING);
@@ -96,27 +110,37 @@ public class SSLTesterFrame extends JFrame implements ActionListener {
 		panel.add(protocolLabel);
 		panel.add(_protocolList);
 		
+		_useNss = new JCheckBox("Use NSS");
+		_useNss.setSelected(false);
+		JLabel nssLabel = new JLabel("Keystore Option:", JLabel.TRAILING);
+		nssLabel.setLabelFor(_useNss);
+		panel.add(nssLabel);
+		panel.add(_useNss);
+		
 		_connect = new JButton("Connect");
 		_connect.addActionListener(this);
 		_connect.setEnabled(false);
+		
+		// The keystore and password field may be empty, in which case the
+		// defaults will be used.
 		TextChangedListener textListener = new TextChangedListener(_connect);
 		textListener.addTextField(_hostName);
-		_hostName.getDocument().addDocumentListener(textListener);
 		textListener.addTextField(_portNumber);
+		_hostName.getDocument().addDocumentListener(textListener);
 		_portNumber.getDocument().addDocumentListener(textListener);
 		panel.add(_connect);
 		
 		_exit = new JButton("Exit");
 		_exit.addActionListener(new ExitListener());
 		panel.add(_exit);
-		panel.setLayout(new GridLayout(5, 2));//new SpringLayout());//
+		panel.setLayout(new GridLayout(7, 2, 2, 1));//new SpringLayout());//
 		
 		return panel;
 	}
 
 	private JPanel createTextAreaPanel() {
 		JPanel panel = new JPanel();
-		_textArea = new JTextArea(15, 20);
+		_textArea = new JTextArea(16, 30);
 		JScrollPane scrollPane = new JScrollPane(_textArea,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -138,8 +162,40 @@ public class SSLTesterFrame extends JFrame implements ActionListener {
 				_textArea.append("Connect button pressed.\n");
 				_textArea.append(String.format("Host Name: %s\n", _hostName.getText()));
 				_textArea.append(String.format("Port Number: %s\n", _portNumber.getText()));
+				_textArea.append(String.format("Keystore: %s\n", _keyStore.getText()));
+				_textArea.append(String.format("Use NSS: %s\n", _useNss.isSelected()));
 				_textArea.append(String.format("Password: %s\n", new String(_password.getPassword())));
 				_textArea.append(String.format("Protocol: %s\n", _protocolList.getSelectedItem()));
+				
+				// TODO - Not the best separation of MVC, but calling SSLClient
+				// from here. I guess we should pass it a stream or some
+				// appender so we can see what it outputs.
+				
+				String secret = new String(_password.getPassword());				
+				try {
+					// TODO - Probably ought to check whether something weird
+					// was input for the port.
+					int port = Integer.parseInt(_portNumber.getText());
+					SSLClient client = new SSLClient(_hostName.getText(), port,
+							_useNss.isSelected(), _keyStore.getText(), secret,
+							secret);
+
+					// TODO - Shouldn't all this stuff be in a client method?
+					// Why do
+					// I have to do everything?
+					SSLSocket socket = client.getSocket();
+					socket.setUseClientMode(true);
+					socket.startHandshake();
+					new ClientThread(socket).start();
+				} catch (NumberFormatException n) {
+					n.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 	}

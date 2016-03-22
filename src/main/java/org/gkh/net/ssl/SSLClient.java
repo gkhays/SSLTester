@@ -88,6 +88,7 @@ public class SSLClient extends AbstractSocket {
 //		}
 
 		// TODO - How about an XML or JSON configuration file?
+		// TODO - Would you settle for an old fashioned properties file?
 		System.out.println("Starting Java test client...");
 
 		String path = null;

@@ -1,4 +1,4 @@
-package org.gkh.net;
+package org.gkh.net.ssl;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

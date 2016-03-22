@@ -1,4 +1,4 @@
-package org.gkh.net;
+package org.gkh.net.ssl;
 
 import java.io.BufferedReader;
 import java.io.IOException;

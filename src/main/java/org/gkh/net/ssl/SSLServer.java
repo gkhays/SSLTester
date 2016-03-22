@@ -1,4 +1,4 @@
-package org.gkh.net;
+package org.gkh.net.ssl;
 
 import javax.net.*;
 import javax.net.ssl.*;

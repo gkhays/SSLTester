@@ -1,0 +1,18 @@
+launcher:
+ [launch4j] Compiling resources
+ [launch4j] Generated resource file...
+ [launch4j] LANGUAGE 0, 1
+ [launch4j] 2 RCDATA BEGIN "1.7.1\0" END
+ [launch4j] 18 RCDATA BEGIN "1\0" END
+ [launch4j] 30 RCDATA BEGIN "2\0" END
+ [launch4j] 21 RCDATA BEGIN "http://java.com/download\0" END
+ [launch4j] 8 RCDATA BEGIN ".\0" END
+ [launch4j] 20 RCDATA BEGIN "32\0" END
+ [launch4j] 101 RCDATA BEGIN "An error occurred while starting the application.\0" END
+ [launch4j] 102 RCDATA BEGIN "This application was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted.\0" END
+ [launch4j] 103 RCDATA BEGIN "This application requires a Java Runtime Environment\0" END
+ [launch4j] 104 RCDATA BEGIN "The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.\0" END
+ [launch4j] 17 RCDATA BEGIN "true\0" END
+
+BUILD FAILED
+C:\Users\haysg\Documents\GitHub\SSLTester\build.xml:57: net.sf.launch4j.BuilderException: net.sf.launch4j.ExecException: java.io.IOException: Cannot run program "C:\Users\haysg\Documents\GitHub\SSLTester\build\bin\windres.exe": CreateProcess error=2, The system cannot find the file specified

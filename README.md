@@ -5,19 +5,11 @@ A set of SSL client and server testing tools
 
 Usually you will want to use the ssl switch in order to watch the client and server interactions, e.g.
 
-<pre>
-  <code>
-  -Djavax.net.debug=ssl
-  </code>
-</pre>
+`-Djavax.net.debug=ssl`
 
 It is useful to watch the handshake, e.g.
 
-<pre>
-  <code>
-  -Djavax.net.debug.ssl:handshake
-  </code>
-</pre>
+`-Djavax.net.debug.ssl:handshake`
 
 Note: A value of "help" will show all options.
 
